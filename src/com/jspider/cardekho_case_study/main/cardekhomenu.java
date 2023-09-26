@@ -4,61 +4,96 @@ import java.util.Scanner;
 
 import com.jspider.cardekho_case_study.operation.CarOperation;
 
-public class cardekhomenu  {
-	private CarOperation carOperation = new CarOperation(); 
-	private static boolean loop=true;
+public class cardekhomenu {
+
+	private static CarOperation operation = new CarOperation();
+	private static boolean loop = true;
+
 	public static void main(String[] args) {
+
 		while (loop) {
-			cardekhomenu();
+			carDekhoMenu();
 		}
+
 	}
-	 public static void cardekhomenu()
-	{
-		System.out.println("=========Menu========="
-				           +"\n 1. Enter car details"
-				           +"\n 2. Search Car details"
-				           +"\n 3.Edit car details"
-				           +"\n 4.Exit");
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the choice");
-		int choice=sc.nextInt();
-		switch (choice) {
+
+	private static void carDekhoMenu() {
+		System.out.println("===========MENU==========\n" 
+							+ "1. Add/Remove Car Details \n" 
+							+ "2. Search Car Details \n"
+							+ "3. Edit Car Details \n" 
+							+ "4. Exit");
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("\nEnter your choice : ");
+		int choice1 = scanner.nextInt();
+		switch (choice1) {
 		case 1:
-			CarOperation.addCarDetails();
-			   
+			System.out.println("===========MENU==========\n"
+								+ "1. Add Car Details \n"
+								+ "2. Remove Car Details \n"
+								+ "3. Go Back To Main Menu");
+			System.out.print("\nEnter your choice : ");
+			int choice2 = scanner.nextInt();
+			switch (choice2) {
+			case 1:
+				operation.addCarDetails();
+				break;
+
+			case 2:
+				operation.removeCarDetails();
+				break;
+				
+			case 3:
+				carDekhoMenu();
+				break;
+				
+			default:
+				System.out.println("\nInvalid choice. Try again..!!");
+				break;
+			}
 			break;
 		case 2:
-			System.out.println("======Search Car======="
-					         +"\n 1.Search car by Name"
-					         +"\n 2.Search car by Brand"
-					         +"\n 3.Search car by Fuel Type");
-			        int searchchoice=sc.nextInt();
-			      switch (searchchoice)
-			      {
-			      case 1:
-				  CarOperation.searchCarByName();
-				  break;
-			      case 2:
-                  CarOperation.searchcarByBrand();
-                  break;
-			      default:
-				  System.out.println("Invalid choice. Please try again");
-			 	 break;
-			     }break;
+			System.out.println("===========MENU==========\n"
+								+ "1. Search Car By Name \n"
+								+ "2. Search Car By Brand \n"
+								+ "3. Search Car By Fuel Type \n"
+								+ "4. Search All Cars \n"
+								+ "5. Go Back To Main Menu");
+			int choice3 = scanner.nextInt();
+			switch(choice3) {
+			case 1:
+				operation.searchByName();
+				break;
+			case 2:
+				operation.searchByBrand();
+				break;
+			case 3:
+				operation.searchByFuelType();
+				break;
+			case 4:
+				operation.getAllCarDetails();
+				break;
+			case 5:
+				carDekhoMenu();
+				break;
+			default:
+				System.out.println("\nInvalid choice. Try again..!!");
+				break;
+			}
+			break;
 		case 3:
-			CarOperation.editCarDetails();
+			operation.editCarDetails();
 			break;
 		case 4:
-			System.out.println("Thank you");
-			loop=false;
+			System.out.println("Thank you..!!");
+			loop = false;
+			scanner.close();
 			break;
+
 		default:
-			System.out.println("Invalid choice. Please try again");
+			System.out.println("\nInvalid choice. Try again..!!");
 			break;
 		}
-		
-		
 	}
-	
-	
+
 }
